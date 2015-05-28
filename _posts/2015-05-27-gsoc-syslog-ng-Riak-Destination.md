@@ -37,18 +37,17 @@ would be used as the basis for further development:
 @version: 3.7
 
 source s_demo {
-    system();
     intenal();
 };
 
 destination d_riak {
-    riak{
+    riak(
         host("localhost")
         port(8087)
         bucket("logs_${YEAR}${MONTH}${DAY}" type("message") mode("store"))
-        key("${UNIXTIME}-${UUID)")
+        key("${UNIXTIME}-${UUID}")
         value("${format-json --scope selected-macros}")
-        };
+        );
 };
 
 log {
