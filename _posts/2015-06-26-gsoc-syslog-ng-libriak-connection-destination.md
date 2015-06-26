@@ -22,9 +22,9 @@ the following tasks were done :
     --disable-java --with-libriack=$HOME/install_new/riack` .
     The major problem I faced here was to find the libraries in the installed
     location. Initially I used the absolute location of my installation path of
-    riack but that wouldn't work on all the systems so then i used the
+    riack but that wouldn't work on all the systems so then I used the
     following in the `modules/riak/Makefile.am` (as you can see its a diff so + is add line and - is remove
-    line') which solved he issue.
+    line) which solved the issue.
 
     ```
     modules_riak_libriak_la_LIBADD   =   \
