@@ -9,7 +9,7 @@ meta: Syslog-ng Riak set mode
 ---
 
 After implementation of the bulk function, the next task was to clean up my
-code in accordance to syslog-ng standards. To acheive that the follwing
+code in accordance to syslog-ng standards. To acheive that the following
 standards were taken care of throughout the code I had written so far :
 
 + Indentation should be done only with spaces,
@@ -40,14 +40,14 @@ used to re-initialize after every log-message hence the bulk mode was failing
 to work.
 The problem was, `riak_worker_insert` function is called every time a log
 message is received, so the index value(idx) lasted as long as the message
-lasted and then was again reinitialized to 0 which wasn't requried, as I
+lasted and then was again reinitialized to 0 which wasn't requried.I
 wanted the `flush_lines`, idx(now `flush_index`) and `setop`(where we
-store the bulk messages in buffer) to last until the flush_index becomes equal
-to the flush_lines and then push it to the riak node. Anything that has to live
+store the bulk messages in buffer) to last until the `flush_index` becomes equal
+to the `flush_lines` and then push it to the riak node. Anything that has to live
 longer than a single call to `riak_worker_insert()`, everything you want to
 persist from one message to another, has to live in RiakDestDriver's structure
-which is a sort of a persistent storage hence flush_index, flush_lines and
-setop were added into the `RiakDestDriver`'s structure. 
+which is a sort of a persistent storage hence `flush_index`, `flush_lines` and
+`setop` were added into the `RiakDestDriver`'s structure. 
 
 Now to check for the memory leaks, I used valgrind in the following steps:-
 
@@ -55,7 +55,7 @@ Now to check for the memory leaks, I used valgrind in the following steps:-
 --log-file=syslog-ng.valgrind.log
 --suppressions=$HOME/syslog-gsoc/syslog-ng/contrib/valgrind/syslog-ng.supp
 sbin/syslog-ng -Fvde -f etc/syslog-ng.conf` in my installation path of syslog-ng i.e install_new/syslog-ng.
-+ After issueing the command I used a simple script `for i in {1..5000}; do echo
++ After issuing the command I used a simple script `for i in {1..5000}; do echo
 commandlogtesttext$i | nc 127.0.0.1 12345; done` to send messages to riak in
 set bulk mode.
 
